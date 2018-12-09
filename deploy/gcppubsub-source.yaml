@@ -1,0 +1,14 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: GcpPubSubSource
+metadata:
+  name: gcppubsub-storeindexer
+spec:
+  gcpCredsSecret:  # A secret in the knative-sources namespace
+    name: gcppubsub-source-key
+    key: key.json
+  googleCloudProject: tmogoserverless  
+  topic: storeindexer
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name:  storeindexer

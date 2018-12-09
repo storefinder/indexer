@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: storeindexer
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: gcr.io/tmogoserverless/storefinder/indexer:latest
+            env:
+              - name: INDEX_NAME
+                value: "storeindex"
