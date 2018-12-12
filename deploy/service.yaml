@@ -10,5 +10,7 @@ spec:
           container:
             image: gcr.io/tmogoserverless/storefinder/indexer:latest
             env:
-              - name: INDEX_NAME
-                value: "storeindex"
+            - name: INDEX_NAME
+              value: "storeindex"
+            - name: ELASTIC_URL
+              value: http://storelocator-elastic:9200

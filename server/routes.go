@@ -26,6 +26,18 @@ func BuildRoutes() []Route {
 			"/",
 			handlers.Index(),
 		},
+		Route{
+			"IndexDelete",
+			"DELETE",
+			"/1.0/admin/index/{indexName}",
+			handlers.DeleteIndex(),
+		},
+		Route{
+			"IndexCreate",
+			"POST",
+			"/1.0/admin/index",
+			handlers.CreateIndex(),
+		},
 	}
 	return routes
 }

@@ -1,6 +1,6 @@
 FROM golang:latest as builder
 
-WORKDIR /go/src/github.com/tmobile/storelocator-indexer
+WORKDIR /go/src/github.com/storefinder/indexer
 
 COPY . .
 
@@ -16,7 +16,7 @@ RUN vgo test $(vgo list ./... | grep -v /vendor/ | grep -v /build/) -cover \
 
  RUN apk --no-cache add ca-certificates curl bash
 
- COPY --from=builder /go/src/github.com/tmobile/storelocator-indexer/indexer .
+ COPY --from=builder /go/src/github.com/storefinder/indexer .
 
  CMD ["./indexer"]
  
