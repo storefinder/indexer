@@ -1,0 +1,22 @@
+apiVersion: build.knative.dev/v1alpha1
+kind: Build
+metadata:
+  name: storefinder-indexer-build
+spec:
+  timeout: 20m
+  serviceAccountName: svc-build
+  source:    
+    git:
+      url: https://github.com/storefinder/indexer.git
+      revision: master
+  template:
+    name: ci-build-template
+    arguments:
+    - name: SONARLOGIN
+      value: <<specify>>
+    - name: PROJECTKEY
+      value: storefinder-indexer
+    - name: ORG
+      value: rprakashg-github
+    - name: IMAGE
+      value: gcr.io/tmogoserverless/storefinder/indexer:latest
