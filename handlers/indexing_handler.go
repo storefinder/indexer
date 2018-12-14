@@ -69,15 +69,11 @@ func Index() http.HandlerFunc {
 		}
 		eventPayload, _ := json.Marshal(ce)
 		log.Warnf("Cloud Event : %v ", eventPayload)
-
 		if err := json.Unmarshal(msg.Data, &stores); err != nil {
 			log.Warnf("Error parsing pubsub message payload to storerecord collection")
 			w.WriteHeader(http.StatusBadRequest)
 		}
-
-		log.Infof("Store Records to be added to Index : %s", string(msg.Data))
-
-		log.Infof("Adding %v stores to index %s", len(stores), indexName)
+		log.Info("Writing to elastic")
 		esProxy = elastic.NewProxy(config)
 		response := esProxy.Index(indexName, stores)
 		log.Infof("Stores added to index %v Stores not added to index %v", len(response.StoresIndexed), len(response.StoresFailedToIndex))
