@@ -172,3 +172,19 @@ func DeleteIndex() http.HandlerFunc {
 		response.Write(w)
 	}
 }
+
+//ClusterStats stats exposes elastic cluster statistics
+func ClusterStats() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		esProxy := elastic.NewProxy(config)
+		stats, err := esProxy.Stats()
+		if err != nil {
+			http.Error(w, "Error Getting Stats", http.StatusInternalServerError)
+		}
+		response := JSONResponse{
+			status: http.StatusOK,
+			data:   stats,
+		}
+		response.Write(w)
+	}
+}

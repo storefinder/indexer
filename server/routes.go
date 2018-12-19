@@ -38,6 +38,12 @@ func BuildRoutes() []Route {
 			"/1.0/admin/index",
 			handlers.CreateIndex(),
 		},
+		Route{
+			"ClusterStats",
+			"GET",
+			"/1.0/admin/stats",
+			handlers.ClusterStats(),
+		},
 	}
 	return routes
 }
